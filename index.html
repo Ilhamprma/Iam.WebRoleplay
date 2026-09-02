@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aetheria — AI Roleplay Studio & Dynamic Worldbuilding Engine</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta name="title" content="Aetheria — AI Roleplay Studio & Dynamic Worldbuilding Engine" />
+    <meta name="description" content="Aetheria adalah studio roleplay AI & mesin game master interaktif. Rancang semesta fiksi, hukum sihir, faksi, dan mainkan petualangan teks TTRPG tanpa batas." />
+    <meta name="keywords" content="AI Roleplay, Worldbuilding AI, TTRPG Game Master, AI Storyteller, Interactive Fiction, AI Dungeon Master, Text RPG, OpenRouter, Ollama" />
+    <meta name="author" content="Aetheria Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://aetheria-ai-roleplay.vercel.app/" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#08090d" />
+
+    <!-- Google Search Console Site Verification Placeholder -->
+    <!-- Ganti content="..." dengan kode verifikasi dari Google Search Console Anda -->
+    <meta name="google-site-verification" content="GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aetheria-ai-roleplay.vercel.app/" />
+    <meta property="og:title" content="Aetheria — AI Roleplay Studio & Dynamic Worldbuilding Engine" />
+    <meta property="og:description" content="Rancang semesta cerita dan mainkan roleplay teks bersama AI Game Master cerdas berstandar TTRPG." />
+    <meta property="og:image" content="https://aetheria-ai-roleplay.vercel.app/icon.svg" />
+    <meta property="og:site_name" content="Aetheria AI Studio" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://aetheria-ai-roleplay.vercel.app/" />
+    <meta property="twitter:title" content="Aetheria — AI Roleplay Studio & Dynamic Worldbuilding Engine" />
+    <meta property="twitter:description" content="Rancang semesta cerita dan mainkan roleplay teks bersama AI Game Master cerdas berstandar TTRPG." />
+    <meta property="twitter:image" content="https://aetheria-ai-roleplay.vercel.app/icon.svg" />
+
+    <!-- Structured Data (JSON-LD) for Google Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Aetheria AI Roleplay Studio",
+      "url": "https://aetheria-ai-roleplay.vercel.app/",
+      "description": "Studio Roleplay Interaktif & Mesin Worldbuilding bertenaga AI dengan dukungan multi-provider (OpenRouter, OpenAI, Groq, Ollama, dan Simulator Offline).",
+      "applicationCategory": "EntertainmentApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "AI World Architect untuk perancangan semesta interaktif",
+        "AI Game Master berstandar TTRPG tanpa godmoding",
+        "Living Codex untuk pencatatan inventaris, NPC, dan quest",
+        "Sistem Simpan Progres, Checkpoint, dan Ekspor Lorebook Markdown",
+        "Dukungan Custom API (OpenRouter, Groq, Ollama, Localhost)"
+      ]
+    }
+    </script>
+
+    <!-- Tailwind CSS CDN with class-based Dark Mode enabled -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="min-h-screen transition-colors duration-150">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

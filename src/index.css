@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Dark Mode Defaults */
+html.dark, body.dark, :root:not(.light) {
+  background-color: #08090d;
+  color: #f8fafc;
+  color-scheme: dark;
+}
+
+/* Light Mode Defaults */
+html.light, body.light, .light {
+  background-color: #f8fafc;
+  color: #0f172a;
+  color-scheme: light;
+}
+
+/* Precision Hairline Scrollbar for Dark Mode */
+html.dark ::-webkit-scrollbar, :root:not(.light) ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+html.dark ::-webkit-scrollbar-track, :root:not(.light) ::-webkit-scrollbar-track {
+  background: #08090d;
+}
+html.dark ::-webkit-scrollbar-thumb, :root:not(.light) ::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb:hover, :root:not(.light) ::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Precision Hairline Scrollbar for Light Mode */
+html.light ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Code & Monospace Elements */
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Selection Highlight */
+html.dark ::selection {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+html.light ::selection {
+  background-color: rgba(15, 23, 42, 0.15);
+  color: #0f172a;
+}

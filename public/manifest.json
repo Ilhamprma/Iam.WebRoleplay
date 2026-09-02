@@ -1,0 +1,16 @@
+{
+  "name": "Aetheria AI Roleplay Studio",
+  "short_name": "Aetheria",
+  "description": "Studio Roleplay Interaktif & Desain Semesta TTRPG bertenaga AI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090d",
+  "theme_color": "#08090d",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
