@@ -61,19 +61,29 @@ body {
 
 @media (min-width: 1024px) {
   .workspace > :not(.conversation-panel) {
-    max-width: 1080px;
+    max-width: 1120px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .workspace > .conversation-panel {
+    max-width: 1120px;
     width: 100%;
     margin-inline: auto;
   }
 
   .workspace > form:last-child {
-    max-width: 1080px;
+    max-width: 1120px;
     width: 100%;
     margin-inline: auto;
   }
 
   .conversation-panel {
     border-color: rgba(255, 255, 255, 0.09);
+  }
+
+  .workspace > div:has(+ .conversation-panel) {
+    overflow: hidden;
   }
 }
 
