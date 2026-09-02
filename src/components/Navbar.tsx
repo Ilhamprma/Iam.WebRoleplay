@@ -41,25 +41,25 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 h-14 bg-white/95 dark:bg-[#08090d]/95 backdrop-blur-md border-b border-slate-200 dark:border-white/[0.08] px-2.5 sm:px-4 md:px-6 flex items-center justify-between transition-colors">
-      {/* Brand & Active Universe Selector */}
-      <div className="flex items-center gap-3">
+      {/* Brand & Active Universe Selector (Opens Story Portal) */}
+      <div className="flex items-center gap-2">
         <button
           onClick={onOpenCampaigns}
-          className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/[0.05] transition text-left"
-          title="Ganti atau Kelola Semesta"
+          className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.08] border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition text-left active:scale-95 group"
+          title="Buka Portal Cerita: Buat Baru atau Lanjutkan Cerita"
         >
-          <div className="w-6 h-6 rounded-md bg-slate-900 text-white dark:bg-white dark:text-slate-950 flex items-center justify-center font-mono text-xs font-bold">
+          <div className="w-7 h-7 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-950 flex items-center justify-center font-mono text-xs font-bold shadow-xs">
             Æ
           </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+          <div className="min-w-0 max-w-[120px] sm:max-w-[180px]">
+            <div className="flex items-center gap-1">
+              <span className="text-xs font-bold text-slate-900 dark:text-slate-100 tracking-tight truncate">
                 {campaign.name || 'Semesta Baru'}
               </span>
-              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">▾</span>
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono group-hover:text-slate-900 dark:group-hover:text-white transition">▾</span>
             </div>
-            <p className="text-[10px] text-slate-500 font-mono leading-none">
-              {campaign.lore.genre || 'Kustom'}
+            <p className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none">
+              {campaign.lore.genre || 'Pilih Cerita'}
             </p>
           </div>
         </button>

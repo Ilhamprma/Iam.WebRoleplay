@@ -4,7 +4,7 @@ import { WorldbuildingWizard } from './components/WorldbuildingWizard';
 import { RoleplayArena } from './components/RoleplayArena';
 import { WorldCodexDrawer } from './components/WorldCodexDrawer';
 import { SettingsModal } from './components/SettingsModal';
-import { CampaignModal } from './components/CampaignModal';
+import { StoryPortalModal } from './components/StoryPortalModal';
 import { SaveCheckpointModal } from './components/SaveCheckpointModal';
 import { useCampaignStore } from './hooks/useCampaignStore';
 import { useTheme } from './hooks/useTheme';
@@ -38,7 +38,7 @@ export const App: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isCampaignsOpen, setIsCampaignsOpen] = useState(false);
+  const [isPortalOpen, setIsPortalOpen] = useState(false);
   const [isCodexOpen, setIsCodexOpen] = useState(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
@@ -56,7 +56,7 @@ export const App: React.FC = () => {
         campaign={activeCampaign}
         apiConfig={apiConfig}
         onOpenSettings={() => setIsSettingsOpen(true)}
-        onOpenCampaigns={() => setIsCampaignsOpen(true)}
+        onOpenCampaigns={() => setIsPortalOpen(true)}
         onToggleCodex={() => setIsCodexOpen(!isCodexOpen)}
         isCodexOpen={isCodexOpen}
         onSwitchPhase={(phase) => {
@@ -115,10 +115,10 @@ export const App: React.FC = () => {
         onSave={(newCfg) => setApiConfig(newCfg)}
       />
 
-      {/* Universe & Campaign Switcher Modal */}
-      <CampaignModal
-        isOpen={isCampaignsOpen}
-        onClose={() => setIsCampaignsOpen(false)}
+      {/* Story Selection & Creation Portal Modal */}
+      <StoryPortalModal
+        isOpen={isPortalOpen}
+        onClose={() => setIsPortalOpen(false)}
         campaigns={campaigns}
         activeCampaignId={activeCampaignId}
         onSelectCampaign={(id) => setActiveCampaignId(id)}
