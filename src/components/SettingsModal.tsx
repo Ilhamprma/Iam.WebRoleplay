@@ -241,19 +241,24 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 {/* Quick Model Chips */}
                 {discoveredModels.length === 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-2">
-                    <span className="text-[11px] text-slate-500 self-center mr-1">Rekomendasi:</span>
-                    {[
+                    <span className="text-[11px] text-slate-500 self-center mr-1">Pilihan Cepat:</span>
+                    {(PROVIDER_PRESETS[formData.provider]?.defaultModels || [
+                      'gpt-ultimate',
+                      'claude-ultimate',
+                      'gemini-ultimate',
+                      'combo-hardcore',
                       'cl/anthropic/claude-sonnet-4.6',
                       'cl/openai/gpt-5.4',
-                      'google/gemini-2.0-flash-001',
-                      'meta-llama/llama-3.3-70b-instruct:free',
-                      'gpt-4o-mini',
-                    ].map((m) => (
+                    ]).map((m) => (
                       <button
                         type="button"
                         key={m}
                         onClick={() => handleQuickModelSelect(m)}
-                        className="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 transition"
+                        className={`px-2 py-0.5 rounded text-[11px] font-mono border transition ${
+                          formData.model === m
+                            ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950 border-slate-900 dark:border-white font-bold'
+                            : 'bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300'
+                        }`}
                       >
                         {m.split('/').pop()}
                       </button>

@@ -47,8 +47,17 @@ export const PROVIDER_PRESETS: Record<
   },
   custom: {
     baseUrl: 'http://localhost:20128/v1',
-    model: 'cl/anthropic/claude-sonnet-4.6',
-    defaultModels: ['cl/anthropic/claude-sonnet-4.6', 'cl/openai/gpt-5.4', 'cl/google/gemini-3.1-flash-lite-preview'],
+    model: 'gpt-ultimate',
+    defaultModels: [
+      'gpt-ultimate',
+      'claude-ultimate',
+      'gemini-ultimate',
+      'combo-hardcore',
+      'cl/anthropic/claude-sonnet-4.6',
+      'cl/openai/gpt-5.4',
+      'cl/google/gemini-3.1-flash-lite-preview',
+      'deepseek',
+    ],
   },
 };
 
@@ -97,22 +106,30 @@ export async function fetchAvailableModels(baseUrl: string, apiKey?: string): Pr
     headers['Authorization'] = `Bearer ${apiKey.trim()}`;
   }
 
+  let lastError: any = null;
   for (const url of candidateUrls) {
     try {
       const res = await fetch(url, { headers });
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data.data)) {
-          return data.data.map((m: any) => m.id || m.name).filter(Boolean);
+          const list = data.data.map((m: any) => m.id || m.name).filter(Boolean);
+          if (list.length > 0) return list;
         }
         if (Array.isArray(data.models)) {
-          return data.models.map((m: any) => m.name || m.id).filter(Boolean);
+          const list = data.models.map((m: any) => m.name || m.id).filter(Boolean);
+          if (list.length > 0) return list;
         }
       }
-    } catch {
-      // try next candidate
+    } catch (err: any) {
+      lastError = err;
     }
   }
+
+  if (lastError && (lastError.message?.includes('fetch') || lastError.name === 'TypeError')) {
+    throw new Error('Gagal menghubungi server /models. Pastikan izin "Insecure Content" telah diaktifkan dan browser telah di-refresh.');
+  }
+
   return [];
 }
 
