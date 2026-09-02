@@ -68,7 +68,13 @@ export function useCampaignStore() {
   const [apiConfig, setApiConfig] = useState<ApiConfig>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.API_CONFIG);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved) as ApiConfig;
+        if (parsed.baseUrl.includes('real-terms-roll.loca.lt')) {
+          return DEFAULT_API_CONFIG;
+        }
+        return parsed;
+      }
     } catch (e) {
       console.error('Failed to load API config:', e);
     }
