@@ -74,3 +74,12 @@ html.light ::selection {
   background-color: rgba(15, 23, 42, 0.15);
   color: #0f172a;
 }
+
+/* Hide scrollbar for clean horizontal carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

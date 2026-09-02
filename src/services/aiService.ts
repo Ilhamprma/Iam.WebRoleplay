@@ -120,23 +120,28 @@ export async function fetchAvailableModels(baseUrl: string, apiKey?: string): Pr
  * Builds the initial World Architect system prompt for Phase 1.
  */
 export function buildWorldbuildingSystemPrompt(): string {
-  return `You are the World Architect, a master worldbuilder and creative partner for an interactive roleplay adventure.
+  return `You are the World Architect, an expert worldbuilding AI and collaborative creative director for interactive roleplay stories.
 Language: Indonesian (Bahasa Indonesia).
 
 YOUR CORE OBJECTIVE:
-Help the player collaboratively design their roleplay universe (setting, theme, rules, factions, player persona, and starting quest) through a natural, engaging conversation.
+Help the player collaboratively design their roleplay universe (setting, theme, rules, factions, player persona, and starting quest).
 
-GUIDELINES:
+### BEHAVIOR FOR GENRE RECOMMENDATION REQUESTS:
+If the player asks for a recommendation (e.g. "berikan rekomendasi worldbuilding dari genre fantasy", "rekomendasi sci-fi", "bikin world steampunk", etc.) OR names a genre:
+1. **IMMEDIATELY GENERATE A COMPLETE, RICH WORLDBUILDING BLUEPRINT** directly without hesitation. Do not just ask what they want; give them a fully fleshed-out, creative proposal with:
+   - **🏰 Nama Dunia & Tema/Genre** (Vivid name & distinctive atmospheric tone)
+   - **📜 Sinopsis & Konflik Utama Dunia** (2-3 engaging sentences describing the world's central tension)
+   - **✨ Hukum Realitas / Sistem Sihir / Teknologi** (Unique rules, costs, or power mechanics)
+   - **🛡️ Faksi-Faksi Penguasa & Kekuatan Dunia** (2-3 major competing groups or guilds)
+   - **👤 Karakter Pemain** (Recommended Name, Role/Archetype, & Starter Equipment)
+   - **📍 Lokasi Awal & Insiden Pembuka (Inciting Incident)** (The evocative scene where the adventure kicks off)
+2. **ALWAYS INVITE REVISIONS & CUSTOMIZATION:**
+   - At the end of your proposal, explicitly encourage the player to revise, modify, or add any detail they want (e.g. *"Bagaimana menurut Anda konsep ini? Anda bisa bebas meminta revisi apa pun (misal: 'ubah sistem sihirnya', 'tambahkan faksi baru', 'ganti peran karakter saya'), atau jika sudah cocok, klik tombol **'Kunci Lore & Masuk Roleplay'** untuk langsung memulai petualangan!"*).
+
+### GENERAL CONVERSATION GUIDELINES:
 1. Act as an enthusiastic, imaginative, and focused creative director.
-2. Ask 1-2 sharp, focused questions per turn rather than overwhelming the player with long questionnaires.
-3. Suggest vivid details, atmospheric hooks, and intriguing conflicts based on what the player likes.
-4. When the foundation is established, summarize key elements:
-   - World Name & Genre
-   - Reality Rules / Magic System / Tech Level
-   - Dominant Factions / Threats
-   - Player Character Background & Role
-   - Initial Starting Location & Inciting Incident
-5. Inform the player that once they are ready, they can click "Kunci Lore & Masuk Roleplay" to begin their actual adventure.`;
+2. When the user provides revisions or feedback, smoothly integrate their changes into the world structure.
+3. Keep prose evocative, atmospheric, and cleanly formatted using Markdown.`;
 }
 
 /**
@@ -405,10 +410,73 @@ function simulateAiResponse(messages: Message[], systemPrompt: boolean | string)
 
   // Worldbuilding Architect Mode
   if (typeof systemPrompt === 'string' && systemPrompt.includes('World Architect')) {
-    if (messages.length <= 1) {
-      return `*Selamat datang di Studio Worldbuilding. Saya adalah AI World Architect Anda.*\n\nMari kita rancang fondasi semesta cerita Anda bersama. Sebagai pijakan pertama:\n\n1. **Tema atau Genre utama apa** yang ingin Anda bangun? (Misal: *Dark Fantasy gerhana abadi, Cyberpunk 2088 megacity bawah tanah, Sci-Fi penjelajahan galaksi tak terpetakan, atau Misteri Supernatural 1920-an*?)\n2. Seperti apa **suasana dan konflik sentral** yang ingin Anda rasakan di dunia ini?`;
+    if (lastUserMsg.includes('fantasy') || lastUserMsg.includes('fantasi') || lastUserMsg.includes('high fantasy')) {
+      return `### 🏰 Rekomendasi Worldbuilding: **Aethelgard — Semesta Kristal & Reruntuhan Langit**
+
+**1. 📜 Sinopsis & Konflik Utama:**
+Dunia fantasi tinggi tempat pulau-pulau melayang di langit diikat oleh aliran energi sihir murni yang disebut *Aetherflux*. Setelah runtuhnya Takhta Kristal seribu tahun lalu, pecahan artefak purba mulai jatuh ke benua bawah, membangkitkan monster primordial dan memicu perang suci antar guild petualang.
+
+**2. ✨ Hukum Sihir & Realitas:**
+* **Resonansi Kristal:** Setiap penyihir mengikat jiwa mereka ke batu kristal elemen (*Ignis, Glacies, Tempestas*). Menggunakan sihir berlebih mengikis ingatan dan mempercepat pengkristalan tubuh.
+* **Hukum Gravitasi Mengambang:** Kapal udara layar sutra astral menjadi satu-satunya moda transportasi antar pulau langit.
+
+**3. 🛡️ Faksi-Faksi Penguasa:**
+* **Ordo Penjaga Arkana (Arcane Vanguard):** Penguasa akademi sihir terapung yang ingin memonopoli kristal purba.
+* **Serikat Pemburu Bayangan (Silverclaw Guild):** Korps tentara bayaran dan penjelajah rimba bawah yang mencari kebebasan.
+* **Pemuja Gerhana Abadi:** Sekte misterius yang meyakini kehancuran langit adalah takdir penebusan.
+
+**4. 👤 Rekomendasi Karakter Pemain:**
+* **Nama Karakter:** *Kaelen the Shardseeker* (atau nama pilihan Anda)
+* **Peran / Kelas:** *Spellblade Pengelana*
+* **Perlengkapan Awal:** Pedang Perak Resonansi, Kompas Astral, Jubah Pelindung Badai, Kantong Kristal Pecahan.
+
+**5. 📍 Lokasi Awal & Insiden Pembuka:**
+* **Lokasi:** *Tavern Sayap Patah di Pelabuhan Langit Aeridor.*
+* **Insiden:** Saat Anda sedang mempelajari peta reruntuhan kuno, sebuah kapal udara terbakar jatuh di dermaga depan kedai. Seorang kurir terluka parah merangkak ke hadapan Anda dan menyerahkan sebuah tabung segel bercahaya ungu.
+
+---
+💡 **Opsi Revisi / Kustomisasi:**
+Bagaimana menurut Anda konsep dunia ini? Anda dapat **bebas meminta revisi** (contoh: *"Ubah karakter saya jadi pencuri relik"*, *"Tambahkan naga kuno"*, *"Buat atmosfernya lebih gelap/grimdark"*), atau jika sudah cocok, klik tombol **"Kunci Lore & Masuk Roleplay"** di atas untuk langsung mulai bermain!`;
     }
-    return `*Gagasan yang sangat kuat. Latar ini memiliki atmosfer yang pekat dan potensi narasi yang luar biasa.*\n\nMari kita perdalam dua aspek krusial berikut:\n- **Hukum Dunia / Sistem Kekuatan:** Bagaimana sihir, teknologi canggih, atau hukum alam di semesta ini bekerja? Apakah ada batasan atau harga yang harus dibayar saat menggunakannya?\n- **Titik Awal Karakter:** Siapa nama karakter Anda, dan di lokasi mana kita akan memulai adegan pembuka cerita?\n\n*Catatan: Saat fondasi dunia sudah terasa cukup matang, Anda dapat mengklik tombol **"Kunci Lore & Masuk Roleplay"** di atas untuk mulai bermain.*`;
+
+    if (lastUserMsg.includes('cyberpunk') || lastUserMsg.includes('2088') || lastUserMsg.includes('sci-fi') || lastUserMsg.includes('masa depan')) {
+      return `### 🌃 Rekomendasi Worldbuilding: **Neo-Veridia 2099 — Distopia Jaringan & Krom**
+
+**1. 📜 Sinopsis & Konflik Utama:**
+Megacity vertikal yang tenggelam dalam hujan asam abadi dan cahaya neon dingin. Lapisan atas (*Upper Spire*) dikuasai oleh eksekutif transhuman abadi, sementara lantai terbawah (*Undercity*) adalah sarang pasar gelap sibernetik dan perang antar faksi sindikat.
+
+**2. ✨ Hukum Teknologi & Sibernetik:**
+* **Neuro-Sync & Cyberpsychosis:** Modifikasi tubuh mekanik memerlukan obat penstabil saraf *Syntha-Glaze*. Tanpa obat tersebut, pengguna akan mengalami delusi destruktif.
+* **Blackwall Grid:** Jaringan data terkunci yang menyimpan AI otonom liar dari era perang korporasi lampau.
+
+**3. 🛡️ Faksi-Faksi Penguasa:**
+* **Korporasi Omni-Corp Global:** Monopoli implan militer dan aparat penegak hukum swasta.
+* **Sindikat Krom Bawah (Rust Jackals):** Geng jalanan modifikasi liar penguasa jalur penyelundupan.
+* **Jaringan Netrunner Hantu (The Ghost Weavers):** Kelompok peretas anarkis yang berusaha meretas satelit korporasi.
+
+**4. 👤 Rekomendasi Karakter Pemain:**
+* **Nama Karakter:** *Dexter 'Viper' Vance* (atau nama pilihan Anda)
+* **Peran / Kelas:** *Infiltrator / Ex-Cybernetic Mercenary*
+* **Perlengkapan Awal:** Cyberdeck Militer, Pistol Railgun Modifikasi, Jaket Kevlar Berinsulasi Termal.
+
+**5. 📍 Lokasi Awal & Insiden Pembuka:**
+* **Lokasi:** *Klinik Gelap Ripperdoc di Sektor 4B Neon Slums.*
+* **Insiden:** Anda baru saja terbangun setelah operasi penggantian chip optik darurat. Di luar pintu klinik, terdengar derap langkah sepatu bot berat aparat taktis Omni-Corp yang mulai mendobrak masuk mencari chip data yang tertanam di kepala Anda.
+
+---
+💡 **Opsi Revisi / Kustomisasi:**
+Anda bisa meminta revisi apa pun (misal: *"Ganti peran saya jadi detektif korporat"*, *"Tambahkan senjata laser plasma"*, *"Ubah nama kotanya"*), atau klik **"Kunci Lore & Masuk Roleplay"** untuk memulai!`;
+    }
+
+    if (lastUserMsg.includes('revisi') || lastUserMsg.includes('ubah') || lastUserMsg.includes('ganti') || lastUserMsg.includes('tambah')) {
+      return `*Revisi telah dicatat dan diselaraskan ke dalam rancangan semesta dunia.*\n\nPerubahan yang Anda minta telah disesuaikan pada struktur Codex dunia:\n- **Penyesuaian Narasi:** Hukum dunia dan latar faksi telah diperbarui sesuai arahan Anda.\n- **Karakter & Dinamika:** Peran dan status awal karakter Anda kini memiliki motivasi baru yang selaras dengan konflik terkini.\n\n*Apakah ada aspek lain yang ingin Anda modifikasi lagi, atau kita siap melangkah ke petualangan sesungguhnya dengan mengklik **"Kunci Lore & Masuk Roleplay"**?*`;
+    }
+
+    if (messages.length <= 1) {
+      return `*Selamat datang di Studio Worldbuilding. Saya adalah AI World Architect Anda.*\n\nSaya siap membantu merancang semesta cerita secara instan atau langkah demi langkah. \n\nSilakan **sebutkan genre yang Anda inginkan** (misal: *"Berikan rekomendasi worldbuilding dari genre fantasy"*, *"Cyberpunk 2099"*, *"Horor Kosmis Eldritch"*, *"Wuxia / Silat"*, atau *"Sci-Fi Ruang Angkasa"*), dan saya akan langsung membuatkan cetak biru dunia yang utuh untuk Anda review dan revisi!`;
+    }
+
+    return `*Gagasan yang sangat menarik! Konsep dunia ini memiliki fondasi yang solid dan penuh intrik.*\n\nBerikut ringkasan hukum semesta yang terbentuk:\n- **Dinamika Dunia:** Konflik utama bergerak antara kekuatan yang mapan dan ancaman baru yang mulai bangkit.\n- **Posisi Karakter:** Anda memegang peran kunci di titik persimpangan nasib semesta ini.\n\n*Anda bebas meminta revisi detail apa pun kapan saja, atau klik **"Kunci Lore & Masuk Roleplay"** di atas jika sudah siap bertualang!*`;
   }
 
   // Roleplay Arena Mode (Zero Godmoding, Sensory Rich)
