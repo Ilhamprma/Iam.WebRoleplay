@@ -1,12 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-  --font-family-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-family-mono: 'JetBrains Mono', monospace;
-}
+@variant dark (&:where(.dark, .dark *));
 
 * {
   margin: 0;
@@ -14,252 +9,146 @@
   box-sizing: border-box;
 }
 
-html {
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  background: #08090d;
 }
 
-body {
-  min-width: 320px;
-  min-height: 100dvh;
-  overflow-x: hidden;
-}
-
-.app-header {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), 0 12px 28px rgba(0, 0, 0, 0.08);
-}
-
-.workspace {
-  isolation: isolate;
-}
-
-.conversation-panel {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 18px 50px rgba(0, 0, 0, 0.12);
-  scrollbar-gutter: stable;
-}
-
-.conversation-panel > div {
-  animation: message-in 180ms ease-out both;
-}
-
-@keyframes message-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.workspace::before {
-  content: '';
-  position: fixed;
-  inset: 64px 0 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(circle at 50% 0%, rgba(100, 116, 139, 0.14), transparent 48%);
-}
-
-@media (min-width: 1024px) {
-  .workspace > :not(.conversation-panel) {
-    max-width: 1120px;
-    width: 100%;
-    margin-inline: auto;
-  }
-
-  .workspace > .conversation-panel {
-    max-width: 1120px;
-    width: 100%;
-    margin-inline: auto;
-  }
-
-  .workspace > form:last-child {
-    max-width: 1120px;
-    width: 100%;
-    margin-inline: auto;
-  }
-
-  .conversation-panel {
-    border-color: rgba(255, 255, 255, 0.09);
-  }
-
-  .workspace > div:has(+ .conversation-panel) {
-    overflow: hidden;
-  }
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button,
-a,
-input,
-textarea,
-select {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid #94a3b8;
-  outline-offset: 2px;
-}
-
-@media (max-width: 639px) {
-  .app-header {
-    padding-inline: 8px;
-    gap: 4px;
-  }
-
-  .app-header > div:nth-child(2) {
-    max-width: 38vw;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .app-header > div:nth-child(2)::-webkit-scrollbar {
-    display: none;
-  }
-
-  .app-header > div:last-child {
-    gap: 2px;
-  }
-
-  .app-header button {
-    min-height: 40px;
-  }
-
-  .app-header > div:first-child {
-    min-width: 0;
-    flex: 1;
-  }
-
-  .app-header > div:first-child > button {
-    max-width: 100%;
-  }
-
-  .workspace {
-    padding-inline: 8px;
-    padding-block: 8px;
-  }
-
-  .conversation-panel {
-    min-height: 0;
-    border-radius: 14px;
-    padding: 12px;
-  }
-
-  .workspace > form:last-child button {
-    min-width: 44px;
-  }
-
-  [class*="fixed inset-0"] {
-    align-items: flex-end;
-    padding: 8px;
-  }
-
-  [class*="fixed inset-0"] > div {
-    max-height: calc(100dvh - 16px);
-    border-radius: 18px 18px 12px 12px;
-    padding: 16px;
-  }
-
-  [class*="fixed inset-0"] form > div:last-child,
-  [class*="fixed inset-0"] form > div:last-child > div {
-    flex-wrap: wrap;
-  }
-
-  [class*="fixed inset-0"] input,
-  [class*="fixed inset-0"] textarea,
-  [class*="fixed inset-0"] select {
-    min-height: 44px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-
-/* Dark Mode Defaults */
-html.dark, body.dark, :root:not(.light) {
-  background-color: #08090d;
+/* Base Dark Theme (Default) */
+html.dark, html.dark body, html.dark #root, :root:not(.light) {
+  background-color: #080a11;
   color: #f8fafc;
   color-scheme: dark;
 }
 
-/* Light Mode Defaults */
-html.light, body.light, .light {
-  background-color: #f8fafc;
+/* Base Light Theme */
+html.light, html.light body, html.light #root {
+  background-color: #f1f5f9;
   color: #0f172a;
   color-scheme: light;
 }
 
-/* Precision Hairline Scrollbar for Dark Mode */
-html.dark ::-webkit-scrollbar, :root:not(.light) ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-html.dark ::-webkit-scrollbar-track, :root:not(.light) ::-webkit-scrollbar-track {
-  background: #08090d;
-}
-html.dark ::-webkit-scrollbar-thumb, :root:not(.light) ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
-}
-html.dark ::-webkit-scrollbar-thumb:hover, :root:not(.light) ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+/* Cosmic Studio Ambient Backdrops */
+.studio-bg {
+  background-color: #080a11;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 45%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, rgba(6, 182, 212, 0.05) 0px, transparent 45%);
 }
 
-/* Precision Hairline Scrollbar for Light Mode */
-html.light ::-webkit-scrollbar {
+html.light .studio-bg {
+  background-color: #f1f5f9;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.04) 0px, transparent 50%);
+}
+
+/* Unified Surface Cards */
+.studio-card {
+  background: #0f1320;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.light .studio-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Nested Sub-Cards */
+.studio-subcard {
+  background: #151a2c;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+html.light .studio-subcard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+/* Header Bar */
+.studio-header {
+  background: rgba(12, 15, 25, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.light .studio-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Precision Scrollbars */
+::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
-html.light ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
 html.light ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 4px;
 }
 html.light ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
-/* Code & Monospace Elements */
-code, pre, .font-mono {
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* Selection Highlight */
-html.dark ::selection {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-html.light ::selection {
-  background-color: rgba(15, 23, 42, 0.15);
-  color: #0f172a;
-}
-
-/* Hide scrollbar for clean horizontal carousels */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Monospace font */
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Form input resets */
+button, input, textarea, select {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+@media (min-width: 1024px) {
+  .codex-drawer {
+    width: 360px;
+    max-width: 360px;
+    flex: 0 0 360px;
+  }
+}
+
+@media (max-width: 639px) {
+  .codex-drawer {
+    width: 100%;
+    max-width: none;
+  }
 }
