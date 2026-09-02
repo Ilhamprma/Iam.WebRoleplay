@@ -16,4 +16,4 @@ User-agent: facebookexternalhit
 Allow: /
 
 # Sitemaps
-Sitemap: https://aetheria-ai-roleplay.vercel.app/sitemap.xml
+Sitemap: https://iam-webroleplay.vercel.app/sitemap.xml
