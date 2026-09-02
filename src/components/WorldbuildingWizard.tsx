@@ -189,10 +189,10 @@ export const WorldbuildingWizard: React.FC<WorldbuildingWizardProps> = ({
   const hasStarted = campaign.worldbuildingMessages.length > 0;
 
   return (
-    <div className="workspace flex flex-col h-[calc(100dvh-56px)] max-w-4xl mx-auto w-full px-2.5 sm:px-4 py-2 sm:py-3">
+    <div className="workspace flex flex-col h-[calc(100dvh-56px)] max-w-6xl mx-auto w-full px-2.5 sm:px-6 py-3 sm:py-5">
       {/* Quick Genre Recommendation Bar (Visible on both intro & ongoing discussion) */}
       <div className="mb-2 shrink-0">
-        <div className="flex items-center justify-between gap-2 px-1 mb-1.5">
+          <div className="flex items-center justify-between gap-2 px-1 mb-2">
           <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-300">
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span>Rekomendasi Genre Cepat:</span>
@@ -260,7 +260,7 @@ export const WorldbuildingWizard: React.FC<WorldbuildingWizardProps> = ({
         </div>
       ) : (
         /* Conversation Transcript */
-        <div className="flex-1 overflow-y-auto space-y-3.5 pr-1 sm:pr-2 p-3 sm:p-4 rounded-2xl bg-white dark:bg-[#090b10] border border-slate-200 dark:border-white/[0.06] shadow-xs">
+        <div className="conversation-panel flex-1 overflow-y-auto space-y-3.5 pr-1 sm:pr-2 p-3 sm:p-5 rounded-2xl bg-white dark:bg-[#090b10] border border-slate-200 dark:border-white/[0.06] shadow-xs">
           {campaign.worldbuildingMessages.map((msg) => {
             const isUser = msg.sender === 'user';
             return (
