@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isDark = theme === 'dark';
 
   return (
-    <header className="app-header sticky top-0 z-40 h-14 bg-white/95 dark:bg-[#08090d]/95 backdrop-blur-md border-b border-slate-200 dark:border-white/[0.08] px-2.5 sm:px-4 md:px-6 flex items-center justify-between transition-colors">
+    <header className="app-header sticky top-0 z-40 h-16 bg-white/95 dark:bg-[#08090d]/95 backdrop-blur-md border-b border-slate-200 dark:border-white/[0.08] px-3 sm:px-5 lg:px-8 flex items-center justify-between transition-colors">
       {/* Brand & Active Universe Selector (Opens Story Portal) */}
       <div className="flex items-center gap-2">
         <button
@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.08] border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition text-left active:scale-95 group"
           title="Buka Portal Cerita: Buat Baru atau Lanjutkan Cerita"
         >
-          <div className="w-7 h-7 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-950 flex items-center justify-center font-mono text-xs font-bold shadow-xs">
+            <div className="w-8 h-8 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 flex items-center justify-center font-mono text-xs font-bold shadow-xs">
             Æ
           </div>
           <div className="min-w-0 max-w-[120px] sm:max-w-[180px]">
@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Phase Segmented Controller */}
-      <div className="flex items-center p-1 rounded-lg bg-slate-100 dark:bg-[#0f1118] border border-slate-200 dark:border-white/[0.08]">
+      <div className="flex items-center p-1 rounded-xl bg-slate-100 dark:bg-[#0f1118] border border-slate-200 dark:border-white/[0.08] shadow-sm">
         <button
           onClick={() => onSwitchPhase('worldbuilding')}
           className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition ${

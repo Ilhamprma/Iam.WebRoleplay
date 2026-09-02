@@ -53,10 +53,28 @@ body {
 .workspace::before {
   content: '';
   position: fixed;
-  inset: 56px 0 0;
+  inset: 64px 0 0;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 0%, rgba(100, 116, 139, 0.11), transparent 42%);
+  background: radial-gradient(circle at 50% 0%, rgba(100, 116, 139, 0.14), transparent 48%);
+}
+
+@media (min-width: 1024px) {
+  .workspace > :not(.conversation-panel) {
+    max-width: 1080px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .workspace > form:last-child {
+    max-width: 1080px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .conversation-panel {
+    border-color: rgba(255, 255, 255, 0.09);
+  }
 }
 
 button,

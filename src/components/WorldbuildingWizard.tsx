@@ -189,7 +189,7 @@ export const WorldbuildingWizard: React.FC<WorldbuildingWizardProps> = ({
   const hasStarted = campaign.worldbuildingMessages.length > 0;
 
   return (
-    <div className="workspace flex flex-col h-[calc(100dvh-56px)] max-w-6xl mx-auto w-full px-2.5 sm:px-6 py-3 sm:py-5">
+    <div className="workspace flex flex-col h-[calc(100dvh-64px)] max-w-none mx-auto w-full px-3 sm:px-6 lg:px-10 py-3 sm:py-5">
       {/* Quick Genre Recommendation Bar (Visible on both intro & ongoing discussion) */}
       <div className="mb-2 shrink-0">
           <div className="flex items-center justify-between gap-2 px-1 mb-2">
@@ -260,7 +260,7 @@ export const WorldbuildingWizard: React.FC<WorldbuildingWizardProps> = ({
         </div>
       ) : (
         /* Conversation Transcript */
-        <div className="conversation-panel flex-1 overflow-y-auto space-y-3.5 pr-1 sm:pr-2 p-3 sm:p-5 rounded-2xl bg-white dark:bg-[#090b10] border border-slate-200 dark:border-white/[0.06] shadow-xs">
+        <div className="conversation-panel flex-1 overflow-y-auto space-y-4 pr-1 sm:pr-2 p-4 sm:p-6 lg:px-10 rounded-2xl bg-white dark:bg-[#090b10] border border-slate-200 dark:border-white/[0.06] shadow-xs">
           {campaign.worldbuildingMessages.map((msg) => {
             const isUser = msg.sender === 'user';
             return (
@@ -274,7 +274,7 @@ export const WorldbuildingWizard: React.FC<WorldbuildingWizardProps> = ({
                   </div>
                 )}
                 <div
-                  className={`max-w-[85%] sm:max-w-2xl rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed border ${
+                  className={`max-w-[85%] sm:max-w-[72%] rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed border ${
                     isUser
                       ? 'bg-slate-900 text-white dark:bg-[#151822] dark:border-white/10 rounded-tr-none shadow-xs'
                       : 'bg-slate-50 text-slate-800 border-slate-200 dark:bg-[#0e1118] dark:border-white/[0.06] dark:text-slate-300 rounded-tl-none shadow-xs whitespace-pre-wrap'
