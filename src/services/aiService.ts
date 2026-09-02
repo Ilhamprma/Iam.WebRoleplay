@@ -410,7 +410,7 @@ export async function extractWorldCodexFromChat(
 /**
  * High-fidelity offline simulation fallback honoring all GM Cardinal Rules
  */
-function simulateAiResponse(messages: Message[], systemPrompt: boolean | string): string {
+function simulateAiResponse(messages: Message[], systemPrompt: string): string {
   const lastUserMsg = messages[messages.length - 1]?.content.toLowerCase() || '';
 
   // JSON Extraction Request
