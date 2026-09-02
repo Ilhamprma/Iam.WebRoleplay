@@ -62,6 +62,18 @@ export const PROVIDER_PRESETS: Record<
 };
 
 /**
+ * Detects if the current page is served over HTTPS and the target endpoint is HTTP (localhost).
+ * Browsers block these "mixed content" requests silently.
+ */
+export function isMixedContentBlocked(endpointUrl: string): boolean {
+  if (typeof window === 'undefined') return false;
+  const pageIsHttps = window.location.protocol === 'https:';
+  const endpointIsHttp = endpointUrl.startsWith('http://') && !endpointUrl.startsWith('https://');
+  const isLocal = endpointUrl.includes('localhost') || endpointUrl.includes('127.0.0.1');
+  return pageIsHttps && endpointIsHttp && isLocal;
+}
+
+/**
  * Normalizes OpenAI-compatible base URLs to ensure /chat/completions is properly appended.
  */
 export function normalizeEndpointUrl(baseUrl: string, provider: ApiConfig['provider']): string {
@@ -97,6 +109,13 @@ export async function fetchAvailableModels(baseUrl: string, apiKey?: string): Pr
     cleanUrl = cleanUrl.replace('/chat/completions', '');
   }
 
+  // Early exit: mixed content will always fail
+  if (isMixedContentBlocked(cleanUrl)) {
+    throw new Error(
+      'MIXED_CONTENT_BLOCKED: Situs HTTPS tidak bisa menghubungi server HTTP lokal. Gunakan mode Simulator atau jalankan aplikasi secara lokal (npm run dev).'
+    );
+  }
+
   const candidateUrls = cleanUrl.endsWith('/v1')
     ? [`${cleanUrl}/models`, cleanUrl.replace('/v1', '/models')]
     : [`${cleanUrl}/v1/models`, `${cleanUrl}/models`];
@@ -127,7 +146,7 @@ export async function fetchAvailableModels(baseUrl: string, apiKey?: string): Pr
   }
 
   if (lastError && (lastError.message?.includes('fetch') || lastError.name === 'TypeError')) {
-    throw new Error('Gagal menghubungi server /models. Pastikan izin "Insecure Content" telah diaktifkan dan browser telah di-refresh.');
+    throw new Error('Gagal menghubungi server /models. Periksa apakah server lokal aktif dan port sudah benar.');
   }
 
   return [];
@@ -233,6 +252,19 @@ export async function sendChatMessage(
     throw new Error('URL Endpoint belum diatur. Silakan periksa menu Pengaturan.');
   }
 
+  // ── Mixed Content Guard ──────────────────────────────────────────
+  // HTTPS pages CANNOT call HTTP localhost — browser blocks it silently.
+  // Auto-fallback to the built-in Simulator so the user can still play.
+  if (isMixedContentBlocked(endpoint)) {
+    console.warn('[MixedContent] HTTPS → HTTP localhost blocked. Auto-falling back to Simulator.');
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    const simulated = simulateAiResponse(messages, systemPrompt);
+    // We return the simulated response but ALSO throw a special info so the caller
+    // can decide whether to show a notice. We'll return it directly and let the UI
+    // show a banner via a flag marker at the start.
+    return `⚠️ **[Mode Simulator Otomatis]** — Koneksi ke server lokal (${config.baseUrl}) diblokir oleh browser karena situs ini berjalan di HTTPS. Respons ini dihasilkan oleh **Simulator bawaan**. Untuk menggunakan server lokal, jalankan \`npm run dev\` di komputer Anda.\n\n---\n\n${simulated}`;
+  }
+
   // Pre-validate API Key for cloud providers that strictly require keys
   if (
     (config.provider === 'openrouter' || config.provider === 'openai' || config.provider === 'groq') &&
@@ -312,7 +344,7 @@ export async function sendChatMessage(
     ) {
       if (endpoint.includes('localhost') || endpoint.includes('127.0.0.1')) {
         throw new Error(
-          `Gagal terhubung ke endpoint lokal (${endpoint}). Pastikan server lokal Anda aktif di port tersebut dan mendukung permintaan POST /chat/completions.`
+          `🔒 Koneksi ke server lokal DIBLOKIR oleh browser.\n\nPenyebab: Situs ini berjalan di HTTPS, sehingga browser melarang panggilan ke HTTP localhost (Mixed Content).\n\n✅ Solusi:\n1. Ganti ke mode "Simulator" di Pengaturan\n2. Atau jalankan aplikasi lokal: npm run dev → buka http://localhost:5173`
         );
       }
       if (config.provider === 'openrouter') {

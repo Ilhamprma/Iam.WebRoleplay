@@ -16,6 +16,7 @@ import {
   PROVIDER_PRESETS,
   sendChatMessage,
   fetchAvailableModels,
+  isMixedContentBlocked,
 } from '../services/aiService';
 
 interface SettingsModalProps {
@@ -149,6 +150,32 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               ))}
             </div>
           </div>
+
+          {/* Mixed Content Warning Banner */}
+          {formData.provider !== 'simulation' && isMixedContentBlocked(formData.baseUrl) && (
+            <div className="p-3.5 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs space-y-2">
+              <div className="flex items-center gap-2 font-bold">
+                <Shield className="w-4 h-4 shrink-0" />
+                <span>⚠️ Koneksi Localhost Diblokir (Mixed Content)</span>
+              </div>
+              <p className="leading-relaxed">
+                Situs ini berjalan di <strong>HTTPS</strong>, sehingga browser <strong>melarang</strong> panggilan ke server HTTP lokal
+                (<code className="bg-amber-500/20 px-1 rounded">{formData.baseUrl}</code>). Ini adalah pembatasan keamanan browser yang tidak bisa dihindari.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => handleProviderChange('simulation')}
+                  className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition"
+                >
+                  ✅ Ganti ke Simulator (Langsung Main)
+                </button>
+                <span className="self-center text-[11px] text-amber-600 dark:text-amber-400">
+                  atau jalankan <code className="bg-amber-500/20 px-1 rounded">npm run dev</code> → buka <code className="bg-amber-500/20 px-1 rounded">http://localhost:5173</code>
+                </span>
+              </div>
+            </div>
+          )}
 
           {/* Base URL */}
           {formData.provider !== 'simulation' && (
