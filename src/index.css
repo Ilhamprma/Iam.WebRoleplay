@@ -28,6 +28,23 @@ body {
   overflow-x: hidden;
 }
 
+.app-header {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.workspace {
+  isolation: isolate;
+}
+
+.workspace::before {
+  content: '';
+  position: fixed;
+  inset: 56px 0 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(100, 116, 139, 0.11), transparent 42%);
+}
+
 button,
 input,
 textarea,
@@ -53,26 +70,44 @@ select:focus-visible {
 }
 
 @media (max-width: 639px) {
-  header.sticky {
+  .app-header {
     padding-inline: 8px;
+    gap: 4px;
   }
 
-  header.sticky > div:nth-child(2) {
-    max-width: 42vw;
+  .app-header > div:nth-child(2) {
+    max-width: 38vw;
     overflow-x: auto;
     scrollbar-width: none;
   }
 
-  header.sticky > div:nth-child(2)::-webkit-scrollbar {
+  .app-header > div:nth-child(2)::-webkit-scrollbar {
     display: none;
   }
 
-  header.sticky > div:last-child {
+  .app-header > div:last-child {
     gap: 2px;
   }
 
-  header.sticky button {
+  .app-header button {
     min-height: 40px;
+  }
+
+  .app-header > div:first-child {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .app-header > div:first-child > button {
+    max-width: 100%;
+  }
+
+  .workspace {
+    padding-inline: 8px;
+  }
+
+  .workspace > form:last-child button {
+    min-width: 44px;
   }
 
   [class*="fixed inset-0"] {

@@ -189,7 +189,7 @@ export const WorldbuildingWizard: React.FC<WorldbuildingWizardProps> = ({
   const hasStarted = campaign.worldbuildingMessages.length > 0;
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-56px)] max-w-4xl mx-auto w-full px-2.5 sm:px-4 py-2 sm:py-3">
+    <div className="workspace flex flex-col h-[calc(100dvh-56px)] max-w-4xl mx-auto w-full px-2.5 sm:px-4 py-2 sm:py-3">
       {/* Quick Genre Recommendation Bar (Visible on both intro & ongoing discussion) */}
       <div className="mb-2 shrink-0">
         <div className="flex items-center justify-between gap-2 px-1 mb-1.5">

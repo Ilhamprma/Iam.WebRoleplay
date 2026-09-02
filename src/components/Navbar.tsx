@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isDark = theme === 'dark';
 
   return (
-    <header className="sticky top-0 z-40 h-14 bg-white/95 dark:bg-[#08090d]/95 backdrop-blur-md border-b border-slate-200 dark:border-white/[0.08] px-2.5 sm:px-4 md:px-6 flex items-center justify-between transition-colors">
+    <header className="app-header sticky top-0 z-40 h-14 bg-white/95 dark:bg-[#08090d]/95 backdrop-blur-md border-b border-slate-200 dark:border-white/[0.08] px-2.5 sm:px-4 md:px-6 flex items-center justify-between transition-colors">
       {/* Brand & Active Universe Selector (Opens Story Portal) */}
       <div className="flex items-center gap-2">
         <button
