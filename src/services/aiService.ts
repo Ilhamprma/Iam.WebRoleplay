@@ -46,7 +46,7 @@ export const PROVIDER_PRESETS: Record<
     defaultModels: ['llama3:latest', 'mistral:latest', 'gemma2:latest', 'qwen2.5:latest'],
   },
   custom: {
-    baseUrl: 'http://localhost:20128/v1',
+    baseUrl: 'https://real-terms-roll.loca.lt/v1',
     model: 'gpt-ultimate',
     defaultModels: [
       'gpt-ultimate',
