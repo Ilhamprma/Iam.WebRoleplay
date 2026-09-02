@@ -19,6 +19,94 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background: #08090d;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #94a3b8;
+  outline-offset: 2px;
+}
+
+@media (max-width: 639px) {
+  header.sticky {
+    padding-inline: 8px;
+  }
+
+  header.sticky > div:nth-child(2) {
+    max-width: 42vw;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  header.sticky > div:nth-child(2)::-webkit-scrollbar {
+    display: none;
+  }
+
+  header.sticky > div:last-child {
+    gap: 2px;
+  }
+
+  header.sticky button {
+    min-height: 40px;
+  }
+
+  [class*="fixed inset-0"] {
+    align-items: flex-end;
+    padding: 8px;
+  }
+
+  [class*="fixed inset-0"] > div {
+    max-height: calc(100dvh - 16px);
+    border-radius: 18px 18px 12px 12px;
+    padding: 16px;
+  }
+
+  [class*="fixed inset-0"] form > div:last-child,
+  [class*="fixed inset-0"] form > div:last-child > div {
+    flex-wrap: wrap;
+  }
+
+  [class*="fixed inset-0"] input,
+  [class*="fixed inset-0"] textarea,
+  [class*="fixed inset-0"] select {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 /* Dark Mode Defaults */
